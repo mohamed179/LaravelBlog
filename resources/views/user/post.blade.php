@@ -1,5 +1,6 @@
 @extends('user.layouts.layout')
 
+@section('page-title', 'Post')
 @section('bg-img', asset('user/img/post-bg.jpg'))
 @section('heading', 'MoKamal Post')
 @section('sub-heading', 'Learn together, Grow together')
