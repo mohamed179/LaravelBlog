@@ -18,3 +18,9 @@ Route::get('/', function () {
 Route::get('/post', function () {
     return view('user.post');
 })->name('post');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.home');
+    });
+});
