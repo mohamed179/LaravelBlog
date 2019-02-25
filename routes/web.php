@@ -23,4 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.home');
     });
+
+    Route::get('/post', function () {
+        return view('admin.posts.create');
+    });
 });
