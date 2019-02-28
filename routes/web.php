@@ -31,4 +31,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/category', function () {
         return view('admin.categories.create');
     });
+
+    Route::get('/tag', function () {
+        return view('admin.tags.create');
+    });
 });
