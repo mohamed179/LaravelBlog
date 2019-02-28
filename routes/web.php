@@ -27,4 +27,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/post', function () {
         return view('admin.posts.create');
     });
+
+    Route::get('/category', function () {
+        return view('admin.categories.create');
+    });
 });
