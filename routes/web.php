@@ -19,20 +19,20 @@ Route::get('/post', function () {
     return view('user.post');
 })->name('post');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.home');
-    });
+Route::group(['prefix' => 'admin',  'namespace'=>'Admin'], function () {
+    
+    // dashboard route
+    Route::get('/dashboard', 'DashboardController@index');
 
-    Route::get('/post', function () {
-        return view('admin.posts.create');
-    });
+    // posts routes
+    Route::resource('/posts', 'PostController');
 
-    Route::get('/category', function () {
-        return view('admin.categories.create');
-    });
+    // categories routes
+    Route::resource('/categories', 'CategoryController');
 
-    Route::get('/tag', function () {
-        return view('admin.tags.create');
-    });
+    // tage routes
+    Route::resource('/tags', 'TagController');
+
+    // users routes
+    Route::resource('/users', 'UserController');
 });
