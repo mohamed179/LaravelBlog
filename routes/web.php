@@ -11,14 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+/**
+ * User routes
+ */
+Route::group(['namespace' => 'User'], function(){
+    Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/post', function () {
-    return view('user.post');
-})->name('post');
+    Route::get('/post/{id}', 'PostController@show')->name('post');
+});
 
+/**
+ * Admin routes
+ */
 Route::group(['prefix' => 'admin',  'namespace'=>'Admin'], function () {
     
     // dashboard route
