@@ -48,6 +48,7 @@
             </div>
             <!-- /.box -->
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-warning" href="{{ route('categories.index') }}">Cancel</a>
           </form>
         </div>
         <!-- /.col-->

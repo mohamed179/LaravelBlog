@@ -86,6 +86,7 @@
             </div>
             <!-- /.box -->
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-warning" href="{{ route('posts.index') }}">Cancel</a>
           </form>
         </div>
         <!-- /.col-->
