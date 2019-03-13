@@ -12,6 +12,7 @@
       <h1>
         Create a Category
       </h1>
+      @include('includes.messages')
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
@@ -24,7 +25,8 @@
       <div class="row">
         <div class="col-md-12">
           <!-- form start -->
-          <form role="form" method="post" action="#">
+          <form role="form" method="post" action="{{ route('categories.store') }}">
+            @csrf
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Name and slug</h3>
