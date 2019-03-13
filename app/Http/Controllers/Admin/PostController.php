@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\user\Post;
 
 class PostController extends Controller
 {
@@ -35,7 +36,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: store the new post to database ...
+        // TODO: upload post image
+        // TODO: set the creator 'ADMIN' of the new post
+        
+        // validating the request
+        $this->validate($request, [
+            "title" => "required",
+            "subtitle" => "required",
+            "slug" => "required",
+            "body" => "required",
+        ]);
+        
+        // saving the new post to the database
+        $post = new Post();
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->slug = $request->slug;
+        $post->body = $request->body;
+        if ($request->status) {
+            $post->status = true;
+        }
+        $post->posted_by = 0;
+        $post->save();
+
+        // redirect to view the new post
+        return redirect(route('posts.show', $post->slug));
     }
 
     /**

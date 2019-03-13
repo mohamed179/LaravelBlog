@@ -17,6 +17,13 @@
       <h1>
         Create a post
       </h1>
+      <div style="margin-top:5px">
+        @if (count($errors) > 0)
+          @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{ $error }}</p>
+          @endforeach
+        @endif
+      </div>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
@@ -29,7 +36,8 @@
       <div class="row">
         <div class="col-md-12">
           <!-- form start -->
-          <form role="form" method="post" action="#">
+          <form role="form" method="post" action="{{ route('posts.store') }}">
+            @csrf
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">Titles and photos</h3>
