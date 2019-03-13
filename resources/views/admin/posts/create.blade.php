@@ -17,13 +17,7 @@
       <h1>
         Create a post
       </h1>
-      <div style="margin-top:5px">
-        @if (count($errors) > 0)
-          @foreach ($errors->all() as $error)
-            <p class="alert alert-danger">{{ $error }}</p>
-          @endforeach
-        @endif
-      </div>
+      @include('includes.messages')
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
