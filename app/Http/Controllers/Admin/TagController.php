@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\user\Tag;
 
 class TagController extends Controller
 {
@@ -35,7 +36,20 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: store the new tag in the database ...
+        // validating the request
+        $this->validate($request, [
+            "name" => "required",
+            "slug" => "required",
+        ]);
+        
+        // saving the new tag to the database
+        $tag = new Tag();
+        $tag->name = $request->name;
+        $tag->slug = $request->slug;
+        $tag->save();
+
+        // redirect to view the new tag
+        return redirect(route('tags.show', $tag->slug));
     }
 
     /**
