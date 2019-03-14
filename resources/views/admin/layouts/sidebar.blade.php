@@ -26,10 +26,26 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Features</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
-        <li class="@yield('post_section_active')"><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Posts</span></a></li>
-        <li class="@yield('category_section_active')"><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Categories</span></a></li>
-        <li class="@yield('tag_section_active')"><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Tags</span></a></li>
+        <li>
+          <a href="#">
+            <i class="fa fa-circle-o text-red"></i> <span>Users</span>
+          </a>
+        </li>
+        <li class="@yield('post_section_active')">
+          <a href="{{ route('posts.index') }}">
+            <i class="fa fa-circle-o text-yellow"></i> <span>Posts</span>
+          </a>
+        </li>
+        <li class="@yield('category_section_active')">
+          <a href="{{ route('categories.index') }}">
+            <i class="fa fa-circle-o text-aqua"></i> <span>Categories</span>
+          </a>
+        </li>
+        <li class="@yield('tag_section_active')">
+          <a href="{{ route('tags.index') }}">
+            <i class="fa fa-circle-o text-green"></i> <span>Tags</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
