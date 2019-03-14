@@ -15,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // TODO: show all posts ...
+        $posts = Post::all();
+        return view('admin.posts.index')->with('posts', $posts);
     }
 
     /**
