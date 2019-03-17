@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category->save();
 
         // redirect to view the new category
-        return redirect(route('categories.show', $category->slug));
+        return redirect(route('categories.show', $category->id));
     }
 
     /**

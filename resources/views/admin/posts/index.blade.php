@@ -50,7 +50,7 @@
                 <tbody>
                 @foreach ($posts as $post)
                   <tr>
-                    <td><a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a></td>
+                    <td><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
                     <td>{{ $post->subtitle }}</td>
                     <td>{{ $post->slug }}</td>
                     <!-- TODO: view the posted by field -->

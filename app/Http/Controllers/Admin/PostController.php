@@ -61,7 +61,7 @@ class PostController extends Controller
         $post->save();
 
         // redirect to view the new post
-        return redirect(route('posts.show', $post->slug));
+        return redirect(route('posts.show', $post->id));
     }
 
     /**

@@ -50,7 +50,7 @@ class TagController extends Controller
         $tag->save();
 
         // redirect to view the new tag
-        return redirect(route('tags.show', $tag->slug));
+        return redirect(route('tags.show', $tag->id));
     }
 
     /**
