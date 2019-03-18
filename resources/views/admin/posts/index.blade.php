@@ -58,8 +58,8 @@
                     <td>{{ $post->likes }}</td>
                     <td>{{ $post->dislikes }}</td>
                     <td>{{ $post->created_at }}</td>
-                    <!-- TODO: enable editing and deleting -->
-                    <td><a href="#" class="btn btn-primary">Edit</a></td>
+                    <!-- TODO: enable deleting -->
+                    <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a></td>
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                   </tr>
                 @endforeach

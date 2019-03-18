@@ -73,6 +73,12 @@ class PostController extends Controller
     public function show($id)
     {
         // TODO: view a specific post ...
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            dd($post);
+        } else {
+            return redirect(route('posts.index'));
+        }
     }
 
     /**
@@ -83,7 +89,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        // TODO: view post editing/delete page ...
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            return view('admin.posts.edit')->with('post', $post);
+        } else {
+            return redirect(route('posts.index'));
+        }
     }
 
     /**
@@ -95,7 +106,35 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: update the post in the database ...
+        // TODO: upload post image
+
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            // validating the request
+            $this->validate($request, [
+                "title" => "required",
+                "subtitle" => "required",
+                "slug" => "required",
+                "body" => "required",
+            ]);
+            
+            // update the post in the database
+            $post->title = $request->title;
+            $post->subtitle = $request->subtitle;
+            $post->slug = $request->slug;
+            $post->body = $request->body;
+            if ($request->status) {
+                $post->status = true;
+            } else {
+                $post->status = false;
+            }
+            $post->save();
+
+            // redirect to view the post after updating
+            return redirect(route('posts.show', $post->id));
+        } else {
+            return redirect(route('posts.index'));
+        }
     }
 
     /**
