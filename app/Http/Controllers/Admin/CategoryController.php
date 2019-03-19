@@ -62,6 +62,12 @@ class CategoryController extends Controller
     public function show($id)
     {
         // TODO: view a specific category ...
+        $category = Category::where('id', $id)->first();
+        if ($category) {
+            dd($category);
+        } else {
+            return redirect(route('categories.index'));
+        }
     }
 
     /**
@@ -72,7 +78,12 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        // TODO: view category editing/delete page ...
+        $category = Category::where('id', $id)->first();
+        if ($category) {
+            return view('admin.categories.edit')->with('category', $category);
+        } else {
+            return redirect(route('categories.index'));
+        }
     }
 
     /**
@@ -84,7 +95,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: update the categroy in the database ...
+        $category = Category::where('id', $id)->first();
+        if ($category) {
+            // validating the request
+            $this->validate($request, [
+                "name" => "required",
+                "slug" => "required",
+            ]);
+            
+            // update the post in the database
+            $category->name = $request->name;
+            $category->slug = $request->slug;
+            $category->save();
+
+            // redirect to view the post after updating
+            return redirect(route('categories.show', $category->id));
+        } else {
+            return redirect(route('categories.index'));
+        }
     }
 
     /**

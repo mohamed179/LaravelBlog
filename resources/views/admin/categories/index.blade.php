@@ -49,8 +49,8 @@
                         {{ $category->name }}
                     </a></td>
                     <td>{{ $category->slug }}</td>
-                    <!-- TODO: enable editing and deleting -->
-                    <td><a href="#" class="btn btn-primary">Edit</a></td>
+                    <!-- TODO: enable deleting -->
+                    <td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">Edit</a></td>
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                   </tr>
                 @endforeach
