@@ -49,8 +49,8 @@
                         {{ $tag->name }}
                     </a></td>
                     <td>{{ $tag->slug }}</td>
-                    <!-- TODO: enable editing and deleting -->
-                    <td><a href="#" class="btn btn-primary">Edit</a></td>
+                    <!-- TODO: enable deleting -->
+                    <td><a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary">Edit</a></td>
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                   </tr>
                 @endforeach

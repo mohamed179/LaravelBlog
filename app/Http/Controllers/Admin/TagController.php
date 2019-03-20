@@ -62,6 +62,12 @@ class TagController extends Controller
     public function show($id)
     {
         // TODO: view a specific tag ...
+        $tag = Tag::where('id', $id)->first();
+        if ($tag) {
+            dd($tag);
+        } else {
+            return redirect(route('tags.index'));
+        }
     }
 
     /**
@@ -72,7 +78,12 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        // TODO: view tag editing/delete page ...
+        $tag = Tag::where('id', $id)->first();
+        if ($tag) {
+            return view('admin.tags.edit')->with('tag', $tag);
+        } else {
+            return redirect(route('tags.index'));
+        }
     }
 
     /**
@@ -84,7 +95,24 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: update the tag in the database ...
+        $tag = Tag::where('id', $id)->first();
+        if ($tag) {
+            // validating the request
+            $this->validate($request, [
+                "name" => "required",
+                "slug" => "required",
+            ]);
+            
+            // update the post in the database
+            $tag->name = $request->name;
+            $tag->slug = $request->slug;
+            $tag->save();
+
+            // redirect to view the post after updating
+            return redirect(route('tags.show', $tag->id));
+        } else {
+            return redirect(route('tags.index'));
+        }
     }
 
     /**
