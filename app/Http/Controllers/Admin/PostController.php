@@ -145,6 +145,15 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: remove the post from database ...
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            if($post->delete()) {
+                return redirect(route('posts.index'));
+            } else {
+                return redirect(route('posts.index'))->withErrors(["Post can not be deleted!"]);
+            }
+        } else {
+            return redirect(route('posts.index'))->withErrors(["Post not found!"]);
+        }
     }
 }

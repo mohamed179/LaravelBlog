@@ -17,6 +17,7 @@
       <h1>
         All posts
       </h1>
+      @include('includes.messages')
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
@@ -60,7 +61,13 @@
                     <td>{{ $post->created_at }}</td>
                     <!-- TODO: enable deleting -->
                     <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="#" class="btn btn-danger">Delete</a></td>
+                    <td>
+                      <form role="form" class="form-inline form-delete" method="post" action="{{ route('posts.destroy', $post->id) }}">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>
@@ -90,6 +97,8 @@
   <!-- /.content-wrapper -->
 @endsection
 
+@include('includes.modals.delete')
+
 @section('additional-scripts')
 <!-- DataTables -->
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -105,5 +114,16 @@
       "autoWidth": false,
     });
   });
+</script>
+<script>
+$('#posts_datatable').on('click', '.form-delete', function(e){
+    e.preventDefault();
+    var $form=$(this);
+    $('#confirm').css("visibility", "visible");
+    $('#confirm').modal({ backdrop: 'static', keyboard: false })
+        .on('click', '#delete-btn', function(){
+            $form.submit();
+        });
+});
 </script>
 @endsection
