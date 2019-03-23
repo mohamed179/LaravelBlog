@@ -17,6 +17,7 @@
       <h1>
       All tags
       </h1>
+      @include('includes.messages')
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
@@ -35,7 +36,7 @@
             <div class="box-body">
               <!-- TODO: fix not showing search textbox when no. of columns of
                          table headers less than table data -->
-              <table id="posts_datatable" class="table table-bordered table-striped">
+              <table id="tags_datatable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Tag name</th>
@@ -51,7 +52,13 @@
                     <td>{{ $tag->slug }}</td>
                     <!-- TODO: enable deleting -->
                     <td><a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="#" class="btn btn-danger">Delete</a></td>
+                    <td>
+                      <form role="form" class="form-inline form-delete" method="post" action="{{ route('tags.destroy', $tag->id) }}">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>
@@ -76,6 +83,8 @@
   <!-- /.content-wrapper -->
 @endsection
 
+@include('includes.modals.delete')
+
 @section('additional-scripts')
 <!-- DataTables -->
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -91,5 +100,16 @@
       "autoWidth": false,
     });
   });
+</script>
+<script>
+$('#tags_datatable').on('click', '.form-delete', function(e){
+    e.preventDefault();
+    var $form=$(this);
+    $('#confirm').css("visibility", "visible");
+    $('#confirm').modal({ backdrop: 'static', keyboard: false })
+        .on('click', '#delete-btn', function(){
+            $form.submit();
+        });
+});
 </script>
 @endsection

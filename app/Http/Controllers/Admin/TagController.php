@@ -123,6 +123,15 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: remove the tag from database ...
+        $tag = Tag::where('id', $id)->first();
+        if ($tag) {
+            if($tag->delete()) {
+                return redirect(route('tags.index'));
+            } else {
+                return redirect(route('tags.index'))->withErrors(["Tag can not be deleted!"]);
+            }
+        } else {
+            return redirect(route('tags.index'))->withErrors(["Tag not found!"]);
+        }
     }
 }
