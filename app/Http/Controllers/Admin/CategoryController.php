@@ -123,6 +123,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: remove the category from database ...
+        $category = Category::where('id', $id)->first();
+        if ($category) {
+            if($category->delete()) {
+                return redirect(route('categories.index'));
+            } else {
+                return redirect(route('categories.index'))->withErrors(["Category can not be deleted!"]);
+            }
+        } else {
+            return redirect(route('categories.index'))->withErrors(["Category not found!"]);
+        }
     }
 }
