@@ -46,6 +46,8 @@
                   <th>Likes</th>
                   <th>Dislikez</th>
                   <th>Created at</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,12 +62,12 @@
                     <td>{{ $post->dislikes }}</td>
                     <td>{{ $post->created_at }}</td>
                     <!-- TODO: enable deleting -->
-                    <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary"><i class="fa fa-lg fa-edit"></a></td>
                     <td>
                       <form role="form" class="form-inline form-delete" method="post" action="{{ route('posts.destroy', $post->id) }}">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-lg fa-trash"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -80,6 +82,8 @@
                   <th>Likes</th>
                   <th>Dislikez</th>
                   <th>Created at</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
                 </tfoot>
               </table>
@@ -87,6 +91,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          <a href="{{ route('posts.create') }}" class="btn btn-success">Create a new post</a>
         </div>
         <!-- /.col -->
       </div>

@@ -41,6 +41,8 @@
                 <tr>
                   <th>Tag name</th>
                   <th>Tag slug</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,12 +53,12 @@
                     </a></td>
                     <td>{{ $tag->slug }}</td>
                     <!-- TODO: enable deleting -->
-                    <td><a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary"><i class="fa fa-lg fa-edit"></i></a></td>
                     <td>
                       <form role="form" class="form-inline form-delete" method="post" action="{{ route('tags.destroy', $tag->id) }}">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-lg fa-trash"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -66,6 +68,8 @@
                 <tr>
                   <th>Category name</th>
                   <th>Category slug</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
                 </tfoot>
               </table>
@@ -73,6 +77,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          <a href="{{ route('tags.create') }}" class="btn btn-success">Create a new tag</a>
         </div>
         <!-- /.col -->
       </div>
@@ -91,7 +96,7 @@
 <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 <script>
   $(function () {
-    $('#posts_datatable').DataTable({
+    $('#tags_datatable').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": true,
